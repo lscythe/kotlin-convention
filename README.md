@@ -1,6 +1,6 @@
 # Convention Plugins
 
-Gradle convention plugins for Kotlin projects. Provides pre-configured plugins for JVM, Android, and Multiplatform projects with integrated quality tools and versioning.
+Gradle convention plugins for Kotlin projects. Provides pre-configured plugins for JVM, Android, and Multiplatform projects with integrated quality tools, versioning, and Compose support.
 
 ## Installation
 
@@ -24,8 +24,11 @@ pluginManagement {
 | `dev.lscythe.convention.quality` | Code quality (ktlint, detekt, spotless) |
 | `dev.lscythe.convention.library.kotlin` | Kotlin JVM library |
 | `dev.lscythe.convention.library.android` | Android library |
+| `dev.lscythe.convention.library.android.compose` | Android Compose library |
 | `dev.lscythe.convention.application.android` | Android application |
+| `dev.lscythe.convention.application.android.compose` | Android Compose application |
 | `dev.lscythe.convention.library.multiplatform` | Kotlin Multiplatform library |
+| `dev.lscythe.convention.library.multiplatform.compose` | Compose Multiplatform library |
 
 ## Quick Start
 
@@ -38,7 +41,7 @@ plugins {
 
 commonConfig {
     javaVersion.set(JavaVersion.VERSION_21)
-    androidCompileSdk.set(35)
+    androidCompileSdk.set(36)
     androidMinSdk.set(24)
 }
 ```
@@ -63,6 +66,18 @@ android {
 }
 ```
 
+### Android Compose Library
+
+```kotlin
+plugins {
+    id("dev.lscythe.convention.library.android.compose")
+}
+
+android {
+    namespace = "com.example.compose.library"
+}
+```
+
 ### Android Application
 
 ```kotlin
@@ -75,11 +90,44 @@ android {
 }
 ```
 
+### Android Compose Application
+
+```kotlin
+plugins {
+    id("dev.lscythe.convention.application.android.compose")
+}
+
+android {
+    namespace = "com.example.compose.app"
+}
+```
+
 ### Multiplatform Library
 
 ```kotlin
 plugins {
     id("dev.lscythe.convention.library.multiplatform")
+}
+
+kotlin {
+    jvm()
+    // Add other targets
+}
+```
+
+The Multiplatform Library plugin automatically includes:
+- Coroutines
+- Kotlinx Serialization
+- Kotlinx DateTime
+- Kotlinx Immutable Collections
+- Log4k (multiplatform logging)
+- Turbine (Flow testing)
+
+### Compose Multiplatform Library
+
+```kotlin
+plugins {
+    id("dev.lscythe.convention.library.multiplatform.compose")
 }
 
 kotlin {
@@ -109,4 +157,4 @@ kotlin {
 
 ## License
 
-Apache-2.0
+MIT License - see [LICENSE](LICENSE) for details.
