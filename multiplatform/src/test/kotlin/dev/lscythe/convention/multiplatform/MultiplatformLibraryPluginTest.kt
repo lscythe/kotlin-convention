@@ -79,4 +79,47 @@ class MultiplatformLibraryPluginTest : FunSpec({
         val result = project.build("printVersion")
         result.output shouldContain "version="
     }
+
+    test("compose plugin should apply successfully") {
+        val project = TestProject.create("multiplatform-compose-test")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.library.multiplatform.compose")
+            }
+            
+            kotlin {
+                jvm()
+            }
+        """)
+
+        val result = project.build("tasks")
+        result.output shouldContain "BUILD SUCCESSFUL"
+    }
+
+    test("compose plugin should apply compose multiplatform") {
+        val project = TestProject.create("multiplatform-compose-mp-test")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.library.multiplatform.compose")
+            }
+            
+            kotlin {
+                jvm()
+            }
+            
+            tasks.register("checkPlugins") {
+                doLast {
+                    println("compose-compiler=" + plugins.hasPlugin("org.jetbrains.kotlin.plugin.compose"))
+                    println("compose-multiplatform=" + plugins.hasPlugin("org.jetbrains.compose"))
+                }
+            }
+        """)
+
+        val result = project.build("checkPlugins")
+        result.output shouldContain "compose-compiler=true"
+        result.output shouldContain "compose-multiplatform=true"
+    }
 })
+

@@ -99,4 +99,97 @@ class AndroidPluginsTest : FunSpec({
         result.output shouldContain "versionCode="
         result.output shouldContain "versionName="
     }
+
+    test("AndroidComposeLibraryPlugin should apply successfully") {
+        val project = TestProject.create("android-compose-lib-test")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.library.android.compose")
+            }
+            
+            android {
+                namespace = "com.example.compose.library"
+            }
+        """)
+        project.propertiesFile("""
+            android.useAndroidX=true
+        """)
+
+        val result = project.build("tasks")
+        result.output shouldContain "BUILD SUCCESSFUL"
+    }
+
+    test("AndroidComposeLibraryPlugin should enable Compose") {
+        val project = TestProject.create("android-compose-lib-enabled")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.library.android.compose")
+            }
+            
+            android {
+                namespace = "com.example.compose.library"
+            }
+            
+            tasks.register("checkCompose") {
+                doLast {
+                    println("compose=" + android.buildFeatures.compose)
+                }
+            }
+        """)
+        project.propertiesFile("""
+            android.useAndroidX=true
+        """)
+
+        val result = project.build("checkCompose")
+        result.output shouldContain "compose=true"
+    }
+
+    test("AndroidComposeApplicationPlugin should apply successfully") {
+        val project = TestProject.create("android-compose-app-test")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.application.android.compose")
+            }
+            
+            android {
+                namespace = "com.example.compose.app"
+            }
+        """)
+        project.propertiesFile("""
+            android.useAndroidX=true
+        """)
+
+        val result = project.build("tasks")
+        result.output shouldContain "BUILD SUCCESSFUL"
+    }
+
+    test("AndroidComposeApplicationPlugin should enable Compose") {
+        val project = TestProject.create("android-compose-app-enabled")
+        project.settingsFile("")
+        project.buildFile("""
+            plugins {
+                id("dev.lscythe.convention.application.android.compose")
+            }
+            
+            android {
+                namespace = "com.example.compose.app"
+            }
+            
+            tasks.register("checkCompose") {
+                doLast {
+                    println("compose=" + android.buildFeatures.compose)
+                }
+            }
+        """)
+        project.propertiesFile("""
+            android.useAndroidX=true
+        """)
+
+        val result = project.build("checkCompose")
+        result.output shouldContain "compose=true"
+    }
 })
+

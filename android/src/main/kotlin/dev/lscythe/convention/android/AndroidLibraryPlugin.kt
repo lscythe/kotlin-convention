@@ -30,7 +30,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
         val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
 
         project.extensions.configure<LibraryExtension> {
-            compileSdk = commonConfig?.androidCompileSdk?.get() ?: 35
+            compileSdk = commonConfig?.androidCompileSdk?.get() ?: 36
 
             defaultConfig {
                 minSdk = commonConfig?.androidMinSdk?.get() ?: 24
@@ -53,7 +53,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
             }
 
             compileOptions {
-                val javaVersion = commonConfig?.javaVersion?.get() ?: JavaVersion.VERSION_17
+                val javaVersion = commonConfig?.javaVersion?.get() ?: JavaVersion.VERSION_21
                 sourceCompatibility = javaVersion
                 targetCompatibility = javaVersion
             }
@@ -74,7 +74,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
 
     private fun configureKotlin(project: Project) {
         val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
-        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 17
+        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 21
 
         project.extensions.configure<KotlinAndroidProjectExtension> {
             jvmToolchain(javaVersion)

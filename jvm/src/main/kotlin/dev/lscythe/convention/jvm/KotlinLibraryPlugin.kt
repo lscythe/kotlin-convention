@@ -1,7 +1,6 @@
 package dev.lscythe.convention.jvm
 
 import dev.lscythe.convention.config.CommonConfigExtension
-import dev.lscythe.convention.config.CommonSettingsPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
@@ -28,7 +27,7 @@ class KotlinLibraryPlugin : Plugin<Project> {
 
     private fun configureKotlin(project: Project) {
         val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
-        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 17
+        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 21
 
         project.extensions.configure(KotlinJvmProjectExtension::class.java) {
             jvmToolchain(javaVersion)

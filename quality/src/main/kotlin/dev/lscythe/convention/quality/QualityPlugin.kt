@@ -1,13 +1,13 @@
 package dev.lscythe.convention.quality
 
 import com.diffplug.gradle.spotless.SpotlessExtension
-import io.github.usefulness.KtlintGradleExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.register
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 /**
  * Plugin that configures code quality tools: ktlint, detekt, and spotless.
@@ -34,9 +34,9 @@ class QualityPlugin : Plugin<Project> {
     }
 
     private fun configureKtlint(project: Project) {
-        project.pluginManager.apply("io.github.usefulness.ktlint-gradle-plugin")
+        project.pluginManager.apply("org.jlleitschuh.gradle.ktlint")
 
-        project.extensions.configure<KtlintGradleExtension> {
+        project.extensions.configure<KtlintExtension> {
             ignoreFailures.set(false)
         }
     }

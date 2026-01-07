@@ -9,12 +9,15 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 /**
  * Convention plugin for Kotlin Multiplatform libraries.
- * Applies kotlin-multiplatform with quality and versioning plugins.
+ * Applies kotlin-multiplatform with quality, versioning plugins,
+ * and common dependencies (coroutines, serialization, datetime, logging, testing).
  */
 class MultiplatformLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target.pluginManager) {
             apply("org.jetbrains.kotlin.multiplatform")
+            apply("org.jetbrains.kotlin.plugin.serialization")
+            apply("io.kotest.multiplatform")
             apply("dev.lscythe.convention.quality")
             apply("dev.lscythe.convention.versioning")
         }
@@ -24,35 +27,9 @@ class MultiplatformLibraryPlugin : Plugin<Project> {
 
     private fun configureKotlin(project: Project) {
         val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
-        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 17
+        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 21
 
-        project.extensions.configure<KotlinMultiplatformExtension> {
-            jvmToolchain(javaVersion)
-
-            // Configure JVM target by default
-            jvm {
-                compilations.all {
-                    compileTaskProvider.configure {
-                        compilerOptions {
-                            freeCompilerArgs.add("-Xjdk-release=${javaVersion}")
-                        }
-                    }
-                }
-                testRuns.named("test") {
-                    executionTask.configure {
-                        useJUnitPlatform()
-                    }
-                }
-            }
-
-            sourceSets.apply {
-                commonMain.dependencies {
-                    // Common dependencies can be added here
-                }
-                commonTest.dependencies {
-                    implementation(kotlin("test"))
-                }
-            }
-        }
+        // Add common dependencies
+        project.configureCommonDependencies()
     }
 }

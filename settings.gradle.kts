@@ -18,13 +18,16 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("kotlinx") {
-            from("dev.lscythe.tool:versions-kotlinx:2025.12.23")
+            from("dev.lscythe.tool:versions-kotlinx:2026.01.07.1")
         }
         create("androidx") {
-            from("dev.lscythe.tool:versions-androidx:2025.12.23")
+            from("dev.lscythe.tool:versions-androidx:2026.01.07.1")
+        }
+        create("compose") {
+            from("dev.lscythe.tool:versions-compose-multiplatform:2026.01.07.1")
         }
         create("utils") {
-            from("dev.lscythe.tool:versions-utils:2025.12.23")
+            from("dev.lscythe.tool:versions-utils:2026.01.07.1")
         }
     }
 }

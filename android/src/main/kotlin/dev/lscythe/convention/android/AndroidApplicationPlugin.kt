@@ -32,11 +32,11 @@ class AndroidApplicationPlugin : Plugin<Project> {
         val versioning = project.extensions.findByType<VersioningExtension>()
 
         project.extensions.configure<ApplicationExtension> {
-            compileSdk = commonConfig?.androidCompileSdk?.get() ?: 35
+            compileSdk = commonConfig?.androidCompileSdk?.get() ?: 36
 
             defaultConfig {
                 minSdk = commonConfig?.androidMinSdk?.get() ?: 24
-                targetSdk = commonConfig?.androidTargetSdk?.get() ?: 35
+                targetSdk = commonConfig?.androidTargetSdk?.get() ?: 36
                 
                 versionCode = versioning?.versionCode?.get() ?: 1
                 versionName = versioning?.versionName?.get() ?: "0.0.1"
@@ -58,28 +58,16 @@ class AndroidApplicationPlugin : Plugin<Project> {
             }
 
             compileOptions {
-                val javaVersion = commonConfig?.javaVersion?.get() ?: JavaVersion.VERSION_17
+                val javaVersion = commonConfig?.javaVersion?.get() ?: JavaVersion.VERSION_21
                 sourceCompatibility = javaVersion
                 targetCompatibility = javaVersion
-            }
-
-            sourceSets {
-                getByName("main") {
-                    kotlin.srcDir("src/main/kotlin")
-                }
-                getByName("test") {
-                    kotlin.srcDir("src/test/kotlin")
-                }
-                getByName("androidTest") {
-                    kotlin.srcDir("src/androidTest/kotlin")
-                }
             }
         }
     }
 
     private fun configureKotlin(project: Project) {
         val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
-        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 17
+        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 21
 
         project.extensions.configure<KotlinAndroidProjectExtension> {
             jvmToolchain(javaVersion)

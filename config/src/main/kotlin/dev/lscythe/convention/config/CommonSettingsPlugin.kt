@@ -18,8 +18,8 @@ class CommonSettingsPlugin : Plugin<Project> {
             CommonConfigExtension::class.java
         )
 
-        target.subprojects {
-            extensions.add(EXTENSION_NAME, extension)
+        target.subprojects.forEach { subproject ->
+            subproject.extensions.add(EXTENSION_NAME, extension)
         }
     }
 

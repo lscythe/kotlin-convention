@@ -9,9 +9,8 @@ dependencies {
     implementation(project(":quality"))
     
     compileOnly(kotlinx.gradle.kotlin)
-    
-    // MocKMP for multiplatform mocking in tests
-    testImplementation(libs.mockmp.runtime)
+    compileOnly(compose.gradle.compose.compiler)
+    compileOnly(compose.gradle.compose)
 }
 
 gradlePlugin {
@@ -23,5 +22,13 @@ gradlePlugin {
             implementationClass = "dev.lscythe.convention.multiplatform.MultiplatformLibraryPlugin"
             tags.set(listOf("kotlin", "multiplatform", "library", "convention"))
         }
+        register("multiplatformComposeLibrary") {
+            id = "dev.lscythe.convention.library.multiplatform.compose"
+            displayName = "Multiplatform Compose Library Plugin"
+            description = "Convention plugin for Compose Multiplatform libraries"
+            implementationClass = "dev.lscythe.convention.multiplatform.MultiplatformComposeLibraryPlugin"
+            tags.set(listOf("kotlin", "multiplatform", "compose", "library", "convention"))
+        }
     }
 }
+
