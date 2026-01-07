@@ -49,3 +49,7 @@ Create `config/detekt/detekt.yml` in your project root for custom rules.
 | detektEnabled | true | Enable detekt |
 | spotlessEnabled | true | Enable spotless |
 | failOnViolation | true | Fail build on violations |
+
+## License
+
+MIT License

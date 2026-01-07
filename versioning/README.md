@@ -35,3 +35,7 @@ println(versioning.isSnapshot.get())   // true if uncommitted changes exist
 | versionCode | Int | Numeric version code |
 | isSnapshot | Boolean | True if this is a snapshot build |
 | gitTag | String | The git tag used for versioning |
+
+## License
+
+MIT License

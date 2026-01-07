@@ -40,3 +40,7 @@ class MyPluginTest : FunSpec({
 - kotest-property
 - mockk
 - Gradle TestKit
+
+## License
+
+MIT License

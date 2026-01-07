@@ -19,9 +19,9 @@ plugins {
 
 commonConfig {
     javaVersion.set(JavaVersion.VERSION_21)
-    androidCompileSdk.set(35)
+    androidCompileSdk.set(36)
     androidMinSdk.set(24)
-    androidTargetSdk.set(35)
+    androidTargetSdk.set(36)
 }
 ```
 
@@ -29,9 +29,13 @@ commonConfig {
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| javaVersion | VERSION_17 | Java version for compilation |
-| androidCompileSdk | 35 | Android compile SDK |
+| javaVersion | VERSION_21 | Java version for compilation |
+| androidCompileSdk | 36 | Android compile SDK |
 | androidMinSdk | 24 | Android minimum SDK |
-| androidTargetSdk | 35 | Android target SDK |
+| androidTargetSdk | 36 | Android target SDK |
 
 The extension is automatically available in all subprojects.
+
+## License
+
+MIT License

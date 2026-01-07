@@ -11,7 +11,7 @@ dev.lscythe.convention.library.kotlin
 ## Features
 
 - Applies kotlin-jvm plugin
-- Configures JVM toolchain from commonConfig
+- Configures JVM toolchain from commonConfig (default: JDK 21)
 - Applies quality plugin (ktlint, detekt, spotless)
 - Applies versioning plugin
 - Configures tests with JUnit Platform
@@ -48,3 +48,7 @@ commonConfig {
     javaVersion.set(JavaVersion.VERSION_21)
 }
 ```
+
+## License
+
+MIT License
