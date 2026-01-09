@@ -6,9 +6,19 @@ import io.kotest.matchers.string.shouldContain
 
 class MultiplatformLibraryPluginTest : FunSpec({
 
+    fun settingsWithPluginRepos() = """
+        pluginManagement {
+            repositories {
+                gradlePluginPortal()
+                mavenCentral()
+                google()
+            }
+        }
+    """
+
     test("plugin should apply successfully") {
         val project = TestProject.create("multiplatform-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.multiplatform")
@@ -25,7 +35,7 @@ class MultiplatformLibraryPluginTest : FunSpec({
 
     test("plugin should configure JVM target") {
         val project = TestProject.create("multiplatform-jvm-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.multiplatform")
@@ -42,7 +52,7 @@ class MultiplatformLibraryPluginTest : FunSpec({
 
     test("plugin should apply quality plugin") {
         val project = TestProject.create("multiplatform-quality-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.multiplatform")
@@ -59,7 +69,7 @@ class MultiplatformLibraryPluginTest : FunSpec({
 
     test("plugin should apply versioning plugin") {
         val project = TestProject.create("multiplatform-versioning-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.multiplatform")
@@ -82,9 +92,10 @@ class MultiplatformLibraryPluginTest : FunSpec({
 
     test("compose plugin should apply successfully") {
         val project = TestProject.create("multiplatform-compose-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.library.multiplatform")
                 id("dev.lscythe.convention.library.multiplatform.compose")
             }
             
@@ -99,9 +110,10 @@ class MultiplatformLibraryPluginTest : FunSpec({
 
     test("compose plugin should apply compose multiplatform") {
         val project = TestProject.create("multiplatform-compose-mp-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.library.multiplatform")
                 id("dev.lscythe.convention.library.multiplatform.compose")
             }
             
@@ -122,4 +134,3 @@ class MultiplatformLibraryPluginTest : FunSpec({
         result.output shouldContain "compose-multiplatform=true"
     }
 })
-

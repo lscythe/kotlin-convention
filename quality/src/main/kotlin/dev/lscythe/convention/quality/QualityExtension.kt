@@ -22,6 +22,11 @@ abstract class QualityExtension {
     abstract val spotlessEnabled: Property<Boolean>
 
     /**
+     * Enable Kover for code coverage. Default: true
+     */
+    abstract val koverEnabled: Property<Boolean>
+
+    /**
      * Fail build on code style violations. Default: true
      */
     abstract val failOnViolation: Property<Boolean>
@@ -30,6 +35,7 @@ abstract class QualityExtension {
         ktlintEnabled.convention(true)
         detektEnabled.convention(true)
         spotlessEnabled.convention(true)
+        koverEnabled.convention(true)
         failOnViolation.convention(true)
     }
 }

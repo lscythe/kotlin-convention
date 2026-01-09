@@ -3,13 +3,17 @@ package dev.lscythe.convention.versioning
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.logging.Logging
+import org.gradle.process.ExecOperations
 import java.io.ByteArrayOutputStream
+import javax.inject.Inject
 
 /**
  * Plugin that provides tag-based semantic versioning.
  * Reads version from git tags in the format: MAJOR.MINOR.PATCH
  */
-class VersioningPlugin : Plugin<Project> {
+abstract class VersioningPlugin @Inject constructor(
+    private val execOperations: ExecOperations
+) : Plugin<Project> {
     private val logger = Logging.getLogger(VersioningPlugin::class.java)
 
     override fun apply(target: Project) {
@@ -23,7 +27,7 @@ class VersioningPlugin : Plugin<Project> {
         extension.gitTag.set(versionInfo.tag)
         extension.versionName.set(versionInfo.versionName)
         extension.versionCode.set(versionInfo.versionCode)
-        extension.isSnapshot.set(versionInfo.isSnapshot)
+        extension.snapshot.set(versionInfo.isSnapshot)
 
         // Set project version
         target.version = versionInfo.versionName
@@ -52,7 +56,8 @@ class VersioningPlugin : Plugin<Project> {
     private fun runGitCommand(project: Project, vararg args: String): String? {
         return try {
             val output = ByteArrayOutputStream()
-            val result = project.exec {
+            val result = execOperations.exec {
+                workingDir = project.rootDir
                 commandLine = listOf("git") + args.toList()
                 standardOutput = output
                 isIgnoreExitValue = true

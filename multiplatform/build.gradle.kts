@@ -8,9 +8,9 @@ dependencies {
     implementation(project(":versioning"))
     implementation(project(":quality"))
     
-    compileOnly(kotlinx.gradle.kotlin)
-    compileOnly(compose.gradle.compose.compiler)
-    compileOnly(compose.gradle.compose)
+    implementation(kotlinx.gradle.kotlin)
+    implementation(compose.gradle.compose.compiler)
+    implementation(compose.gradle.compose)
 }
 
 gradlePlugin {

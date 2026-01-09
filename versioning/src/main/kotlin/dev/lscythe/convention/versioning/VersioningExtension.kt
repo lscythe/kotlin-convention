@@ -21,7 +21,7 @@ abstract class VersioningExtension {
     /**
      * Whether this is a snapshot version.
      */
-    abstract val isSnapshot: Property<Boolean>
+    abstract val snapshot: Property<Boolean>
 
     /**
      * The git tag that this version is based on.

@@ -7,13 +7,19 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.getByType
 
 /**
- * Convention plugin for Android Compose libraries.
- * Applies com.android.library and org.jetbrains.kotlin.plugin.compose with sensible defaults.
+ * Convention plugin for adding Compose support to Android libraries.
+ * 
+ * This is an additive plugin - apply it alongside the base library convention:
+ * ```
+ * plugins {
+ *     id("dev.lscythe.convention.library.android")
+ *     id("dev.lscythe.convention.library.android.compose")
+ * }
+ * ```
  */
 class AndroidComposeLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            apply(plugin = "com.android.library")
             apply(plugin = "org.jetbrains.kotlin.plugin.compose")
 
             val extension = extensions.getByType<LibraryExtension>()

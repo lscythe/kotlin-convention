@@ -4,14 +4,24 @@ import dev.lscythe.convention.testing.TestProject
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 
-class KotlinLibraryPluginTest : FunSpec({
+class JvmLibraryPluginTest : FunSpec({
+
+    fun settingsWithPluginRepos() = """
+        pluginManagement {
+            repositories {
+                gradlePluginPortal()
+                mavenCentral()
+                google()
+            }
+        }
+    """
 
     test("plugin should apply kotlin-jvm plugin") {
         val project = TestProject.create("jvm-kotlin-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("dev.lscythe.convention.library.kotlin")
+                id("dev.lscythe.convention.library.jvm")
             }
         """)
         project.kotlinFile("com.example", "Main.kt", """
@@ -28,10 +38,10 @@ class KotlinLibraryPluginTest : FunSpec({
 
     test("plugin should apply quality plugin") {
         val project = TestProject.create("jvm-quality-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("dev.lscythe.convention.library.kotlin")
+                id("dev.lscythe.convention.library.jvm")
             }
         """)
 
@@ -42,10 +52,10 @@ class KotlinLibraryPluginTest : FunSpec({
 
     test("plugin should apply versioning plugin") {
         val project = TestProject.create("jvm-versioning-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("dev.lscythe.convention.library.kotlin")
+                id("dev.lscythe.convention.library.jvm")
             }
             
             tasks.register("printVersion") {
@@ -61,10 +71,10 @@ class KotlinLibraryPluginTest : FunSpec({
 
     test("plugin should configure test task with JUnit Platform") {
         val project = TestProject.create("jvm-test-config")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("dev.lscythe.convention.library.kotlin")
+                id("dev.lscythe.convention.library.jvm")
             }
         """)
 

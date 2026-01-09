@@ -3,12 +3,10 @@ package dev.lscythe.convention.android
 import com.android.build.api.dsl.ApplicationExtension
 import dev.lscythe.convention.config.CommonConfigExtension
 import dev.lscythe.convention.versioning.VersioningExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.findByType
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 /**
  * Convention plugin for Android applications.
@@ -24,7 +22,7 @@ class AndroidApplicationPlugin : Plugin<Project> {
         }
 
         configureAndroid(target)
-        configureKotlin(target)
+        target.configureKotlinAndroid()
     }
 
     private fun configureAndroid(project: Project) {
@@ -32,16 +30,13 @@ class AndroidApplicationPlugin : Plugin<Project> {
         val versioning = project.extensions.findByType<VersioningExtension>()
 
         project.extensions.configure<ApplicationExtension> {
-            compileSdk = commonConfig?.androidCompileSdk?.get() ?: 36
+            project.configureAndroidCommon(this)
 
             defaultConfig {
-                minSdk = commonConfig?.androidMinSdk?.get() ?: 24
                 targetSdk = commonConfig?.androidTargetSdk?.get() ?: 36
                 
                 versionCode = versioning?.versionCode?.get() ?: 1
                 versionName = versioning?.versionName?.get() ?: "0.0.1"
-                
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
             buildTypes {
@@ -56,21 +51,6 @@ class AndroidApplicationPlugin : Plugin<Project> {
                     isDebuggable = true
                 }
             }
-
-            compileOptions {
-                val javaVersion = commonConfig?.javaVersion?.get() ?: JavaVersion.VERSION_21
-                sourceCompatibility = javaVersion
-                targetCompatibility = javaVersion
-            }
-        }
-    }
-
-    private fun configureKotlin(project: Project) {
-        val commonConfig = project.rootProject.extensions.findByType<CommonConfigExtension>()
-        val javaVersion = commonConfig?.javaVersion?.get()?.majorVersion?.toInt() ?: 21
-
-        project.extensions.configure<KotlinAndroidProjectExtension> {
-            jvmToolchain(javaVersion)
         }
     }
 }

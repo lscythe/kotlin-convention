@@ -9,9 +9,9 @@ dependencies {
     implementation(project(":quality"))
     implementation(project(":jvm"))
     
-    compileOnly(androidx.gradle.android)
-    compileOnly(kotlinx.gradle.kotlin)
-    compileOnly(compose.gradle.compose.compiler)
+    implementation(androidx.gradle.android)
+    implementation(kotlinx.gradle.kotlin)
+    implementation(compose.gradle.compose.compiler)
 }
 
 gradlePlugin {

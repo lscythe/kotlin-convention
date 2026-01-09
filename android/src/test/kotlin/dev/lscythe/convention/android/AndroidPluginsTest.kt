@@ -6,9 +6,19 @@ import io.kotest.matchers.string.shouldContain
 
 class AndroidPluginsTest : FunSpec({
 
+    fun settingsWithPluginRepos() = """
+        pluginManagement {
+            repositories {
+                gradlePluginPortal()
+                mavenCentral()
+                google()
+            }
+        }
+    """
+
     test("AndroidLibraryPlugin should apply successfully") {
         val project = TestProject.create("android-lib-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.android")
@@ -28,7 +38,7 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidLibraryPlugin should disable BuildConfig by default") {
         val project = TestProject.create("android-lib-buildconfig")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.library.android")
@@ -54,7 +64,7 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidApplicationPlugin should apply successfully") {
         val project = TestProject.create("android-app-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.application.android")
@@ -74,7 +84,7 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidApplicationPlugin should set version from versioning plugin") {
         val project = TestProject.create("android-app-version")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
                 id("dev.lscythe.convention.application.android")
@@ -102,9 +112,10 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidComposeLibraryPlugin should apply successfully") {
         val project = TestProject.create("android-compose-lib-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.library.android")
                 id("dev.lscythe.convention.library.android.compose")
             }
             
@@ -122,9 +133,10 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidComposeLibraryPlugin should enable Compose") {
         val project = TestProject.create("android-compose-lib-enabled")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.library.android")
                 id("dev.lscythe.convention.library.android.compose")
             }
             
@@ -148,9 +160,10 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidComposeApplicationPlugin should apply successfully") {
         val project = TestProject.create("android-compose-app-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.application.android")
                 id("dev.lscythe.convention.application.android.compose")
             }
             
@@ -168,9 +181,10 @@ class AndroidPluginsTest : FunSpec({
 
     test("AndroidComposeApplicationPlugin should enable Compose") {
         val project = TestProject.create("android-compose-app-enabled")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
+                id("dev.lscythe.convention.application.android")
                 id("dev.lscythe.convention.application.android.compose")
             }
             
@@ -192,4 +206,3 @@ class AndroidPluginsTest : FunSpec({
         result.output shouldContain "compose=true"
     }
 })
-

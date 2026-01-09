@@ -7,7 +7,10 @@ dependencies {
     implementation(project(":config"))
     api(utils.gradle.detekt)
     api(utils.gradle.spotless)
+    api(utils.gradle.kover)
     api(libs.ktlint.gradle)
+    
+    implementation(kotlinx.gradle.kotlin)
 }
 
 gradlePlugin {
@@ -15,9 +18,9 @@ gradlePlugin {
         register("quality") {
             id = "dev.lscythe.convention.quality"
             displayName = "Quality Plugin"
-            description = "Code quality tools: ktlint, detekt, spotless"
+            description = "Code quality tools: ktlint, detekt, spotless, kover"
             implementationClass = "dev.lscythe.convention.quality.QualityPlugin"
-            tags.set(listOf("kotlin", "quality", "ktlint", "detekt", "spotless"))
+            tags.set(listOf("kotlin", "quality", "ktlint", "detekt", "spotless", "kover", "coverage"))
         }
     }
 }

@@ -8,17 +8,17 @@ dependencies {
     implementation(project(":versioning"))
     implementation(project(":quality"))
     
-    compileOnly(kotlinx.gradle.kotlin)
+    implementation(kotlinx.gradle.kotlin)
 }
 
 gradlePlugin {
     plugins {
-        register("kotlinLibrary") {
-            id = "dev.lscythe.convention.library.kotlin"
-            displayName = "Kotlin Library Plugin"
-            description = "Convention plugin for Kotlin JVM libraries"
-            implementationClass = "dev.lscythe.convention.jvm.KotlinLibraryPlugin"
-            tags.set(listOf("kotlin", "library", "convention"))
+        register("jvmLibrary") {
+            id = "dev.lscythe.convention.library.jvm"
+            displayName = "JVM Library Plugin"
+            description = "Convention plugin for JVM libraries using Kotlin"
+            implementationClass = "dev.lscythe.convention.jvm.JvmLibraryPlugin"
+            tags.set(listOf("kotlin", "jvm", "library", "convention"))
         }
     }
 }

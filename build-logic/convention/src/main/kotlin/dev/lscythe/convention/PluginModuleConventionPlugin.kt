@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.gradleKotlinDsl
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugin.devel.GradlePluginDevelopmentExtension
+import org.gradle.plugin.devel.tasks.PluginUnderTestMetadata
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.samWithReceiver.gradle.SamWithReceiverExtension
 
@@ -50,6 +51,19 @@ class PluginModuleConventionPlugin : Plugin<Project> {
 
             tasks.withType<Test>().configureEach {
                 useJUnitPlatform()
+            }
+
+            // Include test dependencies in the plugin classpath for TestKit
+            // Use testCompileClasspath to get all test dependencies
+            afterEvaluate {
+                tasks.withType<PluginUnderTestMetadata>().configureEach {
+                    val testCompileClasspath = configurations.getByName("testCompileClasspath")
+                    val runtimeClasspath = configurations.getByName("runtimeClasspath")
+                    
+                    // Add only the dependencies that are in testCompileClasspath but not in runtimeClasspath
+                    // This avoids circular dependency issues
+                    pluginClasspath.from(testCompileClasspath.minus(runtimeClasspath))
+                }
             }
         }
     }

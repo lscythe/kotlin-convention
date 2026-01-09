@@ -22,8 +22,8 @@ internal fun Project.configureAndroidCompose(
 
         dependencies {
             // Add common Compose dependencies from the project's libs catalog
-            val versionCatalogs = extensions.getByType<VersionCatalogsExtension>()
-            val androidx = versionCatalogs.find("androidx").orElse(null)
+            val versionCatalogs = extensions.findByType(VersionCatalogsExtension::class.java)
+            val androidx = versionCatalogs?.find("androidx")?.orElse(null)
             
             if (androidx != null) {
                 // Add Compose BOM if available

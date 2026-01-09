@@ -16,16 +16,16 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("kotlinx") {
-            from("dev.lscythe.tool:versions-kotlinx:2026.01.07.1")
+            from("dev.lscythe.tool:versions-kotlinx:2026.01.09")
         }
         create("androidx") {
-            from("dev.lscythe.tool:versions-androidx:2026.01.07.1")
+            from("dev.lscythe.tool:versions-androidx:2026.01.09")
         }
         create("compose") {
-            from("dev.lscythe.tool:versions-compose-multiplatform:2026.01.07.1")
+            from("dev.lscythe.tool:versions-compose-multiplatform:2026.01.09")
         }
         create("utils") {
-            from("dev.lscythe.tool:versions-utils:2026.01.07.1")
+            from("dev.lscythe.tool:versions-utils:2026.01.09")
         }
         create("libs") {
             from(files("../gradle/libs.versions.toml"))

@@ -9,10 +9,10 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 /**
- * Convention plugin for Kotlin JVM libraries.
+ * Convention plugin for JVM libraries using Kotlin.
  * Applies kotlin-jvm, quality, and versioning plugins with sensible defaults.
  */
-class KotlinLibraryPlugin : Plugin<Project> {
+class JvmLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target.pluginManager) {
             apply("org.jetbrains.kotlin.jvm")

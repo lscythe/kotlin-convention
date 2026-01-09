@@ -2,6 +2,7 @@ package dev.lscythe.convention.quality
 
 import com.diffplug.gradle.spotless.SpotlessExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import kotlinx.kover.gradle.plugin.dsl.KoverProjectExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskProvider
@@ -10,7 +11,7 @@ import org.gradle.kotlin.dsl.register
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 /**
- * Plugin that configures code quality tools: ktlint, detekt, and spotless.
+ * Plugin that configures code quality tools: ktlint, detekt, spotless, and kover.
  */
 class QualityPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -28,6 +29,9 @@ class QualityPlugin : Plugin<Project> {
             }
             if (extension.spotlessEnabled.get()) {
                 configureSpotless(target)
+            }
+            if (extension.koverEnabled.get()) {
+                configureKover(target)
             }
             registerAggregateTasks(target)
         }
@@ -71,6 +75,15 @@ class QualityPlugin : Plugin<Project> {
         }
     }
 
+    private fun configureKover(project: Project) {
+        project.pluginManager.apply("org.jetbrains.kotlinx.kover")
+
+        project.extensions.configure<KoverProjectExtension> {
+            // Use default Kover configuration
+            // Users can customize via the kover extension in their build files
+        }
+    }
+
     private fun registerAggregateTasks(project: Project) {
         if (project == project.rootProject) {
             project.tasks.register("projectCodeStyle") {
@@ -85,6 +98,12 @@ class QualityPlugin : Plugin<Project> {
                 description = "Fixes code style issues"
                 dependsOn(project.subprojects.mapNotNull { it.tasks.findByName("formatKotlin") })
                 dependsOn(project.subprojects.mapNotNull { it.tasks.findByName("spotlessApply") })
+            }
+
+            project.tasks.register("projectCoverage") {
+                group = "verification"
+                description = "Generates code coverage report for all modules"
+                dependsOn(project.subprojects.mapNotNull { it.tasks.findByName("koverHtmlReport") })
             }
         }
     }

@@ -6,12 +6,22 @@ import io.kotest.matchers.string.shouldContain
 
 class QualityPluginTest : FunSpec({
 
+    fun settingsWithPluginRepos() = """
+        pluginManagement {
+            repositories {
+                gradlePluginPortal()
+                mavenCentral()
+                google()
+            }
+        }
+    """
+
     test("plugin should apply successfully") {
         val project = TestProject.create("quality-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("org.jetbrains.kotlin.jvm") version "2.3.0"
+                id("org.jetbrains.kotlin.jvm") version "2.1.0"
                 id("dev.lscythe.convention.quality")
             }
         """)
@@ -22,10 +32,10 @@ class QualityPluginTest : FunSpec({
 
     test("plugin should register lintKotlin task") {
         val project = TestProject.create("quality-lint-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("org.jetbrains.kotlin.jvm") version "2.3.0"
+                id("org.jetbrains.kotlin.jvm") version "2.1.0"
                 id("dev.lscythe.convention.quality")
             }
         """)
@@ -36,10 +46,10 @@ class QualityPluginTest : FunSpec({
 
     test("plugin should register detekt task") {
         val project = TestProject.create("quality-detekt-test")
-        project.settingsFile("")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("org.jetbrains.kotlin.jvm") version "2.3.0"
+                id("org.jetbrains.kotlin.jvm") version "2.1.0"
                 id("dev.lscythe.convention.quality")
             }
         """)
@@ -48,12 +58,26 @@ class QualityPluginTest : FunSpec({
         result.output shouldContain "detekt"
     }
 
-    test("quality tools can be disabled") {
-        val project = TestProject.create("quality-disabled-test")
-        project.settingsFile("")
+    test("plugin should register kover task") {
+        val project = TestProject.create("quality-kover-test")
+        project.settingsFile(settingsWithPluginRepos())
         project.buildFile("""
             plugins {
-                id("org.jetbrains.kotlin.jvm") version "2.3.0"
+                id("org.jetbrains.kotlin.jvm") version "2.1.0"
+                id("dev.lscythe.convention.quality")
+            }
+        """)
+
+        val result = project.build("tasks", "--all")
+        result.output shouldContain "koverHtmlReport"
+    }
+
+    test("quality tools can be disabled") {
+        val project = TestProject.create("quality-disabled-test")
+        project.settingsFile(settingsWithPluginRepos())
+        project.buildFile("""
+            plugins {
+                id("org.jetbrains.kotlin.jvm") version "2.1.0"
                 id("dev.lscythe.convention.quality")
             }
             
@@ -61,6 +85,7 @@ class QualityPluginTest : FunSpec({
                 ktlintEnabled.set(false)
                 detektEnabled.set(false)
                 spotlessEnabled.set(false)
+                koverEnabled.set(false)
             }
         """)
 
