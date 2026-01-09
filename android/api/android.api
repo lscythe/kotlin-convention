@@ -1,0 +1,44 @@
+public final class dev/lscythe/convention/android/AndroidApplicationPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidApplicationPlugin$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final synthetic fun execute (Ljava/lang/Object;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidCommonKt$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final synthetic fun execute (Ljava/lang/Object;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidComposeApplicationPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidComposeKt$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final synthetic fun execute (Ljava/lang/Object;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidComposeLibraryPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidLibraryPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/android/AndroidLibraryPlugin$inlined$sam$i$org_gradle_api_Action$0 : org/gradle/api/Action {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final synthetic fun execute (Ljava/lang/Object;)V
+}
+

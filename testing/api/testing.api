@@ -1,0 +1,17 @@
+public final class dev/lscythe/convention/testing/TestProject {
+	public static final field Companion Ldev/lscythe/convention/testing/TestProject$Companion;
+	public fun <init> (Ljava/io/File;)V
+	public final fun build ([Ljava/lang/String;)Lorg/gradle/testkit/runner/BuildResult;
+	public final fun buildAndFail ([Ljava/lang/String;)Lorg/gradle/testkit/runner/BuildResult;
+	public final fun buildFile (Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+	public final fun kotlinFile (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+	public final fun propertiesFile (Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+	public final fun settingsFile (Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+	public final fun sourceFile (Ljava/lang/String;Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+}
+
+public final class dev/lscythe/convention/testing/TestProject$Companion {
+	public final fun create (Ljava/lang/String;)Ldev/lscythe/convention/testing/TestProject;
+	public static synthetic fun create$default (Ldev/lscythe/convention/testing/TestProject$Companion;Ljava/lang/String;ILjava/lang/Object;)Ldev/lscythe/convention/testing/TestProject;
+}
+

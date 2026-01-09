@@ -1,0 +1,19 @@
+public abstract class dev/lscythe/convention/config/CommonConfigExtension {
+	public fun <init> ()V
+	public abstract fun getAndroidCompileSdk ()Lorg/gradle/api/provider/Property;
+	public abstract fun getAndroidMinSdk ()Lorg/gradle/api/provider/Property;
+	public abstract fun getAndroidTargetSdk ()Lorg/gradle/api/provider/Property;
+	public abstract fun getJavaVersion ()Lorg/gradle/api/provider/Property;
+}
+
+public final class dev/lscythe/convention/config/CommonSettingsPlugin : org/gradle/api/Plugin {
+	public static final field Companion Ldev/lscythe/convention/config/CommonSettingsPlugin$Companion;
+	public static final field EXTENSION_NAME Ljava/lang/String;
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/config/CommonSettingsPlugin$Companion {
+}
+

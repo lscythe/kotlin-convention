@@ -1,5 +1,7 @@
 plugins {
     alias(kotlinx.plugins.jvm)
+    alias(libs.plugins.kotlin.samwithreceiver)
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 dependencies {

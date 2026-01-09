@@ -1,0 +1,41 @@
+public abstract class dev/lscythe/convention/versioning/VersioningExtension {
+	public fun <init> ()V
+	public abstract fun getGitTag ()Lorg/gradle/api/provider/Property;
+	public abstract fun getSnapshot ()Lorg/gradle/api/provider/Property;
+	public abstract fun getVersionCode ()Lorg/gradle/api/provider/Property;
+	public abstract fun getVersionName ()Lorg/gradle/api/provider/Property;
+}
+
+public abstract class dev/lscythe/convention/versioning/VersioningPlugin : org/gradle/api/Plugin {
+	public static final field Companion Ldev/lscythe/convention/versioning/VersioningPlugin$Companion;
+	public static final field EXTENSION_NAME Ljava/lang/String;
+	public fun <init> (Lorg/gradle/process/ExecOperations;)V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public final class dev/lscythe/convention/versioning/VersioningPlugin$Companion {
+}
+
+public final class dev/lscythe/convention/versioning/VersioningPlugin$VersionInfo {
+	public static final field Companion Ldev/lscythe/convention/versioning/VersioningPlugin$VersionInfo$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;IZ)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()I
+	public final fun component4 ()Z
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;IZ)Ldev/lscythe/convention/versioning/VersioningPlugin$VersionInfo;
+	public static synthetic fun copy$default (Ldev/lscythe/convention/versioning/VersioningPlugin$VersionInfo;Ljava/lang/String;Ljava/lang/String;IZILjava/lang/Object;)Ldev/lscythe/convention/versioning/VersioningPlugin$VersionInfo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTag ()Ljava/lang/String;
+	public final fun getVersionCode ()I
+	public final fun getVersionName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isSnapshot ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/lscythe/convention/versioning/VersioningPlugin$VersionInfo$Companion {
+	public final fun getDEFAULT ()Ldev/lscythe/convention/versioning/VersioningPlugin$VersionInfo;
+}
+

@@ -1,6 +1,8 @@
 plugins {
     id("convention.plugin-module")
     id("convention.publishing")
+    alias(libs.plugins.kotlin.samwithreceiver)
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 gradlePlugin {
