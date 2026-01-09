@@ -3,7 +3,7 @@
 kotlin = "2.3.0"
 
 # ktlint gradle plugin (Pinterest)
-ktlint-gradle = "12.3.0"
+ktlint-gradle = "14.0.1"
 
 # Java compilation
 java-compilation = "21"
