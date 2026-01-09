@@ -1,7 +1,7 @@
 # Convention Plugins
 [![Build](https://github.com/lscythe/kotlin-convention/actions/workflows/build.yml/badge.svg)](https://github.com/lscythe/kotlin-convention/actions/workflows/build.yml)
 [![Security](https://github.com/lscythe/kotlin-convention/actions/workflows/security.yml/badge.svg)](https://github.com/lscythe/kotlin-convention/actions/workflows/security.yml)
-[![Maven Central Version](https://img.shields.io/maven-central/v/dev.lscythe.tool/versions-androidx)](https://central.sonatype.com/search?q=g:dev.lscythe.tool)
+[![Maven Central Version](https://img.shields.io/maven-central/v/dev.lscythe.convention/android)](https://central.sonatype.com/search?q=g:dev.lscythe.convention)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.3.0-blue.svg)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
